@@ -4,7 +4,7 @@ import struct
 import argparse
 import usb.core
 import usb.util
-import libusb_package
+#import libusb_package
 import time
 
 CONTROL_SUCCESS = 0
@@ -193,7 +193,7 @@ class ReSpeaker:
             for i in range(data_cnt):
                 payload += struct.pack(b'i', data_list[i])
         
-        print("WriteCMD: cmdid: {}, resid: {}, payload: {}".format(wvalue, windex, payload))
+        #print("WriteCMD: cmdid: {}, resid: {}, payload: {}".format(wvalue, windex, payload))
 
         self.dev.ctrl_transfer(
             usb.util.CTRL_OUT | usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_RECIPIENT_DEVICE,
@@ -235,7 +235,7 @@ class ReSpeaker:
                 raise ValueError('Unknown status code: {}'.format(response[0]))
             time.sleep(0.01)
         
-        print("ReadCMD: cmdid: {}, resid: {}, payload: {}".format(wvalue, windex, response.tolist()))
+        #print("ReadCMD: cmdid: {}, resid: {}, payload: {}".format(wvalue, windex, response.tolist()))
 
         if data_type == 'uint8':
             byte_data = response.tobytes()
